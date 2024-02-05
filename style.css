@@ -1,0 +1,55 @@
+body{
+    background-color: aliceblue;
+}
+
+h1{
+    text-align: center;
+}
+
+.form{
+    margin-left: 40%;
+}
+
+
+table
+{
+    text-align: center;
+}
+
+label{
+    font-size:large;
+}
+
+.data{
+    margin-bottom: 15px;
+    font-size: large;
+}
+#fontDesign{
+    font-size: 21px;
+    font-weight: 500;
+}
+
+th{
+    padding: 10px 35px;
+}
+
+span{
+    color: red;
+}
+
+input[type=button]{
+    background-color: rgb(226, 242, 255);
+    border-radius: 10%;
+    padding: 5px 20px;
+    margin-top: 10px;
+}
+
+#upper{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#records{
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
