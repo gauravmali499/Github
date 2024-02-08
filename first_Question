@@ -1,0 +1,68 @@
+question: CSFIFTY
+HTML/CSS/JavaScript
+
+ Create one Form with following fields.
+Input text field (Input your name)
+Button (Event)
+Functionality:
+
+Print each character along with how many times it appears in the string when you press the button.
+
+Note: it should be case insensitive.
+
+For Example:
+
+The input string is Reena.
+
+Output: 
+
+Character	Occurrences
+R	1
+e	2
+n	1
+a	1
+
+code:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSFIFTY</title>
+</head>
+<body>
+    <form>
+        <label for="name">Name: </label>
+        <input type="text" id="name"><br>
+        <input type="button" value="submit" onclick="submitForm()">
+    </form>
+
+    <h5>Output</h5>
+    <p id="output"></p>
+    
+
+
+    <script>
+        function submitForm(){
+            var name = document.getElementById("name").value;
+            var out = document.getElementById("output");
+            var value = name.toLowerCase();
+
+            let arr = value.split("");
+            for (let i = 0; i < arr.length; i++) {
+                let ind = arr[i]; 
+                let count = 0;
+                for (let j = 0; j < arr.length; j++) {
+                    if (ind == arr[j]) {
+                        count += 1;
+                    }
+                }
+                out.innerHTML = ind + " = " + count;
+            }
+        
+        }
+        
+    </script>
+</body>
+</html>
