@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice6</title>
+</head>
+<body>
+    <label for="num">Variable:</label>
+    <input type="text" id="num"><br>
+    <button id="check" onclick="validate()">Check</button>
+
+    <script>
+        function validate(){
+            var ans = "true";
+            var text1 = document.getElementById("num").value;
+            if (text1.includes(" ")) {
+                ans = "false";
+            }
+
+            for (let i = 0; i <= 9; i++) {
+                if (text1.charAt(0) == i) {
+                    ans = "false";
+                }
+            }
+            alert(ans);
+        }
+    </script>
+</body>
+</html>
