@@ -530,7 +530,7 @@ if (Number(quantityInput.value) > 1) {
 }
 
 function addToCart(productId){
-
+  var table1 = document.getElementById("table1");
   // cartList.push(productId);
 
   // var l = document.getElementById("item1");
@@ -540,6 +540,9 @@ function addToCart(productId){
   // <p>category: ${productList[productId].category}</p>
   // <p>Price: $${productList[productId].price}</p>
   // <p>Rating: ${productList[productId].rating.rate} (${productList[productId].rating.count} reviews)</p>`;
+  var row = table1.insertRow();
+  row.insertCell(0).innerHTML = productList[productId].id;
+  row.insertCell(1).innerHTML = productList[productId].price;
 }
 
 ListofProduct();
