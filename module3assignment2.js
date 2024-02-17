@@ -482,10 +482,10 @@ var productList=[
 
 ]
 
+var amount = Number(0);
 var cartList = [];
-console.log(cartList)
-
 function ListofProduct(){
+    
   var table = document.getElementById("table");
   for (let i = 0; i < productList.length; i++) {
     var row = table.insertRow();
@@ -496,53 +496,53 @@ function ListofProduct(){
         <p>category: ${productList[i].category}</p>
         <p>Price: $${productList[i].price}</p>
         <p>Rating: ${productList[i].rating.rate} (${productList[i].rating.count} reviews)</p>
-        <input type="number" id="txtQty${productList[i].id}" value="1" min="1">
+        <input type="number" id="txtQty${productList[i].id}" value="1" min="1" readonly>
         <button id="btnIncrement${productList[i].id}" onclick="incrementQuantity(${productList[i].id})">+</button>
         <button id="btnDecrement${productList[i].id}" onclick="decrementQuantity(${productList[i].id})">-</button>
-        <button id="btnCart${productList[i].id}" onclick="addToCart(${productList[i].id})" class="btn btn-outline-secondary">Add to Cart</button></div>`;
-    // if(cartList.length > 0){
-    //   for (let j = 0; j < cartList.length; j++) {
-    //     var item = cartList[j];
-    //     row.insertCell(1).innerHTML = `<div>
-    //         <h4>${productList[item].title}</h4>
-    //         <img src="${productList[item].image}" alt="${productList[item].title}" style="width: 140px; height: 180px">
-    //         <p>category: ${productList[item].category}</p>
-    //         <p>Price: $${productList[item].price}</p>
-    //         <p>Rating: ${productList[item].rating.rate} (${productList[item].rating.count} reviews)</p>
-    //         <input type="number" id="txtQty${productList[item].id}" value="1" min="1">
-    //         <button id="btnIncrement${productList[item].id}" onclick="incrementQuantity(${productList[item].id})">+</button>
-    //         <button id="btnDecrement${productList[item].id}" onclick="decrementQuantity(${productList[item].id})">-</button></div>`;
-    //   }
-    // }    
+        <button id="btnCart${productList[i].id}" onclick="addToCart(${productList[i].id})" class="btn btn-outline-secondary">Add to Cart</button></div>`;  
   }
 }
 
+function addToCart(productId){    
+    if (cartList.includes(Number(productList[productId-1].id))) {
+        amount = amount + (Number(document.getElementById(`txtQty${productId}`).value) *  Number(productList[productId-1].price));
+    } else {
+        cartList.push(Number(productList[productId-1].id));
+        var table1 = document.getElementById("table1");
+        var row = table1.insertRow();
+        row.insertCell(0).innerHTML = productList[productId-1].id;
+        row.insertCell(1).innerHTML = `<p>${productList[productId-1].price}</p>`;
+        row.insertCell(2).innerHTML = `
+        <button id="btnIncrement${productList[productId-1].id}" onclick="incrementQuantity(${productList[productId-1].id})">+</button>
+        <button id="btnDecrement${productList[productId-1].id}" onclick="decrementQuantity(${productList[productId-1].id})">-</button>
+        <button id="btnCart${productList[productId-1].id}" onclick="addToCart(${productList[productId-1].id})" class="btn btn-outline-secondary">Cart</button>
+        <button id="btnCart${productList[productId-1].id}" onclick="removeItem(${productList[productId-1].id})" class="btn btn-outline-secondary">Remove</button>`;
+        amount = amount + (Number(document.getElementById(`txtQty${productId}`).value) * Number(productList[productId-1].price))      
+    }
+    console.log(cartList)
+    console.log(amount);
+    var total_amount = document.getElementById("totalAmount");
+    total_amount.innerHTML = `Total Bill is : ${amount}`;
+    document.getElementById(`btnCart${productList[productId-1].id}`).disabled = true;
+}
+
 function incrementQuantity(productId) {
-  var quantityInput = document.getElementById(`txtQty${productId}`);
-  quantityInput.value = Number(quantityInput.value) + 1;
-}
-
+    var quantityInput = document.getElementById(`txtQty${productId}`);
+    quantityInput.value = Number(quantityInput.value) + 1;
+  }
+  
 function decrementQuantity(productId) {
-var quantityInput = document.getElementById(`txtQty${productId}`);
-if (Number(quantityInput.value) > 1) {
-  quantityInput.value = Number(quantityInput.value) - 1;
-}
+    var quantityInput = document.getElementById(`txtQty${productId}`);
+    if (Number(quantityInput.value) > 1) {
+    quantityInput.value = Number(quantityInput.value) - 1;
+    }
 }
 
-function addToCart(productId){
-  var table1 = document.getElementById("table1");
-  // cartList.push(productId);
-
-  // var l = document.getElementById("item1");
-  // l.innerHTML = `<div>
-  // <h4>${productList[productId].title}</h4>
-  // <img src="${productList[productId].image}" alt="${productList[productId].title}" style="width: 140px; height: 180px">
-  // <p>category: ${productList[productId].category}</p>
-  // <p>Price: $${productList[productId].price}</p>
-  // <p>Rating: ${productList[productId].rating.rate} (${productList[productId].rating.count} reviews)</p>`;
-  var row = table1.insertRow();
-  row.insertCell(0).innerHTML = productList[productId].id;
-  row.insertCell(1).innerHTML = productList[productId].price;
+function removeItem(productId){
+    amount = amount - (Number(document.getElementById(`txtQty${productId}`).value) * Number(productList[productId-1].price));
+    cartList.filter(function(e){return e !== productList[productId-1]})
+   
+    console.log(cartList);
 }
 
 ListofProduct();
